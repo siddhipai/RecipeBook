@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/siddhipai/RecipeBook/static/css/main.17c9fcc2.css",
-    "main.js": "/siddhipai/RecipeBook/static/js/main.b0364f6a.js",
-    "index.html": "/siddhipai/RecipeBook/index.html",
-    "main.17c9fcc2.css.map": "/siddhipai/RecipeBook/static/css/main.17c9fcc2.css.map",
-    "main.b0364f6a.js.map": "/siddhipai/RecipeBook/static/js/main.b0364f6a.js.map"
+    "main.css": "/RecipeBook/static/css/main.17c9fcc2.css",
+    "main.js": "/RecipeBook/static/js/main.b0364f6a.js",
+    "index.html": "/RecipeBook/index.html",
+    "main.17c9fcc2.css.map": "/RecipeBook/static/css/main.17c9fcc2.css.map",
+    "main.b0364f6a.js.map": "/RecipeBook/static/js/main.b0364f6a.js.map"
   },
   "entrypoints": [
     "static/css/main.17c9fcc2.css",
