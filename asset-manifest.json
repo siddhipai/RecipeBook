@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/RecipeBook/static/css/main.17c9fcc2.css",
-    "main.js": "/RecipeBook/static/js/main.b0364f6a.js",
+    "main.js": "/RecipeBook/static/js/main.a5a17ddf.js",
     "index.html": "/RecipeBook/index.html",
     "main.17c9fcc2.css.map": "/RecipeBook/static/css/main.17c9fcc2.css.map",
-    "main.b0364f6a.js.map": "/RecipeBook/static/js/main.b0364f6a.js.map"
+    "main.a5a17ddf.js.map": "/RecipeBook/static/js/main.a5a17ddf.js.map"
   },
   "entrypoints": [
     "static/css/main.17c9fcc2.css",
-    "static/js/main.b0364f6a.js"
+    "static/js/main.a5a17ddf.js"
   ]
 }
