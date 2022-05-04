@@ -1,28 +1,34 @@
 .card {
+    margin-left: 10px;
     box-shadow: 0 4px 8px 0 rgba(140, 82, 82, 0.2);
     transition: 0.3s;
-    width: 40%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(242, 246, 246, 0.915);
-    margin-bottom: 20px;
     align-self: flex-start;
+    min-width: 100px;
   }
 
   .cardIcons {
     display: flex;
-    justify-content: space-between;
+    float: right;
+    margin-top: 1%;
   }
   
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
   .container {
+    min-width: 200px;
     padding: 2px 16px;
+    // height: 100%;
   }
   .icons {
     display: flex;
     align-items: center;
     font-size: 24px;
     cursor: pointer;
+    color: rgb(146, 146, 152);
   }
   
   .delete-icon {

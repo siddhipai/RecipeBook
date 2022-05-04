@@ -26,11 +26,13 @@ const AddRecipeModal = React.forwardRef(function AddRecipeModal(props, recipeRef
     }, [dataToUpdate, isEdit])
 
     const onModalCancel = () => {
-        recipeRef.current.style.display = 'none';
         setError({})
-        setRecTitle('')
-        setRecName('')
-        setIngredients('')
+        if(!isEdit) {
+            setRecTitle('')
+            setRecName('')
+            setIngredients('')
+        }
+        recipeRef.current.style.display = 'none';
     }
     const handleChangeIngr = e => {
         const targetVal = e.target.value
@@ -150,6 +152,7 @@ const AddRecipeModal = React.forwardRef(function AddRecipeModal(props, recipeRef
                                 </div>
                             )) }
                             <input rows="4" cols="50" onKeyDown={handleKeyDown} type='text' placeholder='Enter Tags' onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
+                            <label htmlFor='tag'>Press Enter to add tag</label>
                         </div>
                         <button onClick={addIngredientsToStore} className='save-button'>
                             Add

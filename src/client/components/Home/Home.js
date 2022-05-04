@@ -5,6 +5,7 @@ import Fuse from "fuse.js";
 import Card from '../Card/Card'
 import AddRecipeModal from '../AddRecipeModal/AddRecipeModal';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+import './Home.scss'
 
 function AddRecipe(props) {
   const [isEdit, setIsEdit] = useState(false)
@@ -66,9 +67,12 @@ function AddRecipe(props) {
       <form>
         <input onChange={handleChange} className='search' type="text" placeholder="Search.." name="search" id="query" value={searchQuery}/>
       </form>
+      {data && data.length === 0 && <h1 style={{"color": '#fff', "text-align": "center"}}>You don't have any Recipes</h1>}
+      <div className='cardContainer'>
       {data.map(entry => {
         return <Card key={entry.name} data={entry} removeRecipe={removeRecipe} editRecipe={editRecipe}/>
       })}
+      </div>
       <ConfirmationModal ref={confirmationRef} item={recTDelete} />
       <AddRecipeModal ref={recipeRef} isEdit={isEdit} dataToUpdate={dataToUpdate}/>
     </>)

@@ -1,0 +1,62 @@
+.modal-content {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .search {
+    margin-top: 5px;
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../../../../public/search.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .search:focus {
+    width: 50%;
+    outline: none;
+  }
+
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    // justify-content: space-between;
+  }
+
+//   @media screen and (max-width: 1150px) {
+//     .first-two {
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-evenly;
+//     }
+//   }
