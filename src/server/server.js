@@ -5,30 +5,35 @@ const port = process.env.PORT || 5002;
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 var md5 = require('md5');
+const { RiContactsBookLine } = require('react-icons/ri');
 
 const {Adapter} = pg
 const db = new Adapter({
-  host: '127.0.0.1',
+  host: 'database-1.co0zurwkcgoi.us-west-1.rds.amazonaws.com',
   port: 5432,
   database: 'higharc',
-  user: 'admin',
-  password: 'admin',
+  user: 'postgres',
+  password: 'postgres',
   pool: 10,
   log: true,
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.get('/login', async(req, res) => {
-  const {username, password} = req.query
-    await db.connect()
-    let users = await db.objects('SELECT * FROM higharc.users')
-    for(const user of users) {
-      if(user.name.equalIgnoreCase(username)) {
+// app.get('/', async(req, res) => {
+//   res.send({message: 'welcome to my receipes'})
+// });
+
+// app.get('/', async(req, res) => {
+//   const {username, password} = req.query
+//     await db.connect()
+//     let users = await db.objects('SELECT * FROM higharc.users')
+//     for(const user of users) {
+//       if(user.name.equalIgnoreCase(username)) {
         
-      }
-    }
-});
+//       }
+//     }
+// });
 
 app.post('/users', async (req, res) => {
   const {username, password} = req.body
@@ -40,7 +45,7 @@ app.post('/users', async (req, res) => {
     let objects = await db.objects(`INSERT INTO higharc.sessions(username, session, expiry)VALUES ('${username}', '${uuid}', to_timestamp(${expiry}))`)
     res.send({ uuid, username })
   } else {
-    res.send({ express: 'failure' })
+    res.send({ message: 'failure' })
   }
 });
 
@@ -67,23 +72,40 @@ app.post('/sessions', async (req, res) => {
 app.post('/saverecipes', async(req, res) => {
   const {name, ingredients, username, title, tags} = req.body
   await db.connect()
-  let objects = await db.objects(`INSERT INTO higharc.recipes(id, name, title, ingredients, tags, username)VALUES (DEFAULT, '${name}', '${title}', '${ingredients}', '${tags}', '${username}')`)
-  res.send({ express: 'success with me rec' });
+  try {
+    let objects = await db.objects(`INSERT INTO higharc.recipes(id, name, title, ingredients, tags, username)VALUES (DEFAULT, '${name}', '${title}', '${ingredients}', '${tags}', '${username}')`)
+    res.send({ status: 200, message: 'Recipe added successfully' });
+  } catch(e) {
+    if(e.message.match(/duplicate/g)) {
+      res.send({status: 500, 
+        message: 'Unable to add recipe. Please choose a unique name for your recipe'
+     });
+    }
+  }
 });
-
 
 app.post('/deleterecipe', async(req, res) => {
   const {name} = req.body
   await db.connect()
   let objects = await db.objects(`DELETE FROM higharc.recipes where name='${name}'`)
-  res.send({ express: 'deleted' });
+  res.send({ message: 'deleted' });
 });
 
 app.patch('/updateRecipe', async(req, res) => {
-  const {title, ingredients, name, tags} = req.body
+  const {title, ingredients, name, tags, newName} = req.body
+  console.log(title, ingredients, name, tags, 'title, ingredients, name, tags')
   await db.connect()
-  let objects = await db.objects(`UPDATE higharc.recipes SET ingredients='${ingredients}', tags='${tags}', title='${title}' where name='${name}'`)
-  res.send({ express: 'updated' });
+
+  try {
+    let objects = await db.objects(`UPDATE higharc.recipes SET ingredients='${ingredients}', tags='${tags}', title='${title}' where name='${name}'`)
+    res.send({ status: 200, message: 'Recipe updated successfully' });
+  } catch(e) {
+    if(e.message.match(/duplicate/g)) {
+      res.send({status: 500, 
+        message: 'Unable to update recipe. Please choose a unique name for your recipe'
+     });
+    }
+  }
 });
 
 app.get('/recipes', async(req, res) => {
