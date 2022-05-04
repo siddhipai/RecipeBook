@@ -93,7 +93,6 @@ app.post('/deleterecipe', async(req, res) => {
 
 app.patch('/updateRecipe', async(req, res) => {
   const {title, ingredients, name, tags, newName} = req.body
-  console.log(title, ingredients, name, tags, 'title, ingredients, name, tags')
   await db.connect()
 
   try {

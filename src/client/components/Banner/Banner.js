@@ -9,18 +9,20 @@ function Banner(props) {
   const addSmoothie = e => {
     recipeRef.current.style.display = "block";
   };
-
+  const session = JSON.parse(window.localStorage.getItem('session'))
+  const username = session ? `${session.username}'s` : ''
   const logout = e => {
-    setUser({loggedIn: false})
+    setUser(false)
     window.localStorage.removeItem('session')
   };
 
+
     return <div className="header">
     <div className="Title">
-      <h1 className="titleName">My Smoothies</h1>
-      {user.loggedIn &&  <button onClick={addSmoothie} className='recipe-button'>Add</button>}
+      <h1 className="titleName">{`${username} Smoothies`}</h1>
+      {user &&  <button onClick={addSmoothie} className='recipe-button'>Add</button>}
     </div>
-      {user.loggedIn && <button onClick={logout} className='logout-button'>Logout</button>}
+      {user && <button onClick={logout} className='logout-button'>Logout</button>}
     <AddRecipeModal ref={recipeRef} />
   </div>
 }

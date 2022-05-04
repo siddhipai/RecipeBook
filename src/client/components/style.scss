@@ -50,6 +50,7 @@
   }
   
   .search {
+    margin-top: 5px;
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -68,4 +69,5 @@
 
   .search:focus {
     width: 100%;
+    outline: none;
   }

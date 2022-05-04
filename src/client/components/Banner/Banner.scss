@@ -6,6 +6,7 @@
     width: 10%;
     border: none;
     margin-bottom: 15px;
+    margin-left: 10px;
     border-radius: 4px;
     cursor: pointer;
     background: linear-gradient(
@@ -34,7 +35,7 @@
   .header {
     display: flex;
     width: 100%;
-    background-color: rgb(93, 93, 171);
+    background-color: rgb(146, 146, 152);
   }
 
   .logout-button {

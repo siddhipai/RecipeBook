@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../../../App";
+import './Login.scss'
 
 function Login(props) {
+
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
     const navigate = useNavigate()
@@ -18,7 +20,8 @@ function Login(props) {
         setUsername(e.target.value)
     }
 
-    const onLogin = () => {
+    const onLogin = (e) => {
+      e.preventDefault()
       fetch('/users', {
         method: 'POST',
         headers: {
@@ -29,25 +32,25 @@ function Login(props) {
         .then(res =>  {
           if(res.uuid) {
             window.localStorage.setItem('session', JSON.stringify({token: res.uuid, username: res.username}))
-            setUser({ loggedIn: true });
+            setUser(true);
+            window.location.reload()
             if (location.state?.from) {
               navigate(location.state.from);
             }
           }
         });
-
     }
     const renderForm = (
         <div className="form">
             <div className="input-container">
               <label>Username </label>
-              <input type="text" onChange={handleChangeUserName} value={username} required />
+              <input type="text" onChange={handleChangeUserName} value={username} required className="loginInput"/>
             </div>
             <div className="input-container">
               <label>Password </label>
-              <input type="password" onChange={handleChangePass} value={password} required />
+              <input type="password" onChange={handleChangePass} value={password} required className="loginInput"/>
             </div>
-            <button onClick={onLogin} className='save-button'>
+            <button onClick={onLogin} className='login-button'>
                 Login
             </button>
         </div>

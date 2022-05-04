@@ -1,4 +1,5 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useLocation } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../App";
 
@@ -6,7 +7,7 @@ const PRoutes = (props) => {
 
   const { user } = useContext(UserContext);
   const location = useLocation()
-  const a = user && user.loggedIn ? <Outlet /> : <Navigate to="/" replace state={{from: location}}/>;
+  const a = !user ? <Navigate to="/" replace state={{from: location}}/> : <Outlet/>
   return a
 };
 

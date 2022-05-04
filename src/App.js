@@ -13,11 +13,12 @@ function App() {
   const session = window.localStorage.getItem('session')
   const parsed = JSON.parse(session)
   const loggedIn = parsed && parsed.token ? true : false
-  const [user, setUser] = useState({ loggedIn });
+  const [user, setUser] = useState(loggedIn);
+  const [uName, setName] = useState('');
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(user.loggedIn) {
+    if(user) {
       navigate('/home');
     } else {
       window.localStorage.removeItem('session')
@@ -35,9 +36,9 @@ function App() {
     }).then(response => response.json())
       .then(data => {
         if(data.status == 200) {
-          setUser({loggedIn: true})
+          setUser(true)
         } else {
-          setUser({loggedIn: false})
+          setUser(false)
         }
       });
   }, [])
@@ -45,7 +46,7 @@ function App() {
   return <UserContext.Provider value={{ user, setUser }}>
       <Banner />
       <Routes>
-        <Route path="/" element={<Login />}/>
+        <Route path="/" element={<Login />} exact/>
         <Route element={<PRoutes />}>
           <Route path="/home" element={<Home />} exact/>
         </Route>
